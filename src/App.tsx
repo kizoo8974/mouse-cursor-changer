@@ -13,14 +13,32 @@ function App() {
 
     useEffect(()=> {
       const event = ({clientX, clientY}: MouseEvent) => {
-        setCursorPosition([clientX, clientY])
+
+        const pos = [clientX, clientY]
+
+        switch(selectedCursor){
+          case "cursor0":
+            pos[0] -= 15
+            break;
+            case "cursor1":
+              pos[0] -= 15
+            break;
+            case "cursor2":
+              pos[0] -= 15
+            break;
+            case "cursor3":
+              pos[0] -= 15
+            break;
+        }
+
+        setCursorPosition(pos)
         console.log(clientX, clientY)
       }
 
       window.addEventListener("mousemove", event);
 
       return () => window.removeEventListener("mousemove", event)
-    },[])
+    }, [selectedCursor])
 
 
 
@@ -30,7 +48,8 @@ function App() {
     <img
         
         style={{
-          zIndex: -1,
+          pointerEvents:"none",
+          
           position: "fixed",
           left: cursorPosition[0],
           top: cursorPosition[1],
